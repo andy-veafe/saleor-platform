@@ -30,11 +30,13 @@ services:
       - DASHBOARD_URL=http://localhost:9000/
 
   storefront:
+    ports:
+      - 3000:3000
     build:
       context: ./saleor-storefront
       dockerfile: ./Dockerfile.dev
     restart: unless-stopped
-    network_mode: "host"
+    # network_mode: "host"
     volumes:
       - ./saleor-storefront/:/app:cached
       - /app/node_modules/
