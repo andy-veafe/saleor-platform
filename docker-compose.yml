@@ -32,18 +32,13 @@ services:
   storefront:
     ports:
       - 3000:3000
-    networks:
-      - saleor-backend-tier
     build:
       context: ./saleor-storefront
       dockerfile: ./Dockerfile.dev
     restart: unless-stopped
-    environment:
-      - API_URI=http://api:8000/graphql/
-      - NEXT_PUBLIC_API_URI=http://api:8000/graphql/
-    # volumes:
-    #   - ./saleor-storefront/:/app:cached
-    #   - /app/node_modules/
+    volumes:
+      - ./saleor-storefront/:/app:cached
+      - /app/node_modules/
     command: npm start -- --hostname 0.0.0.0
 
   dashboard:
